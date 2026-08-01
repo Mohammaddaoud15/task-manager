@@ -4,6 +4,7 @@ from task_manager.exceptions import TaskNotFoundError
 from task_manager.models import TaskPriority, TaskStatus
 from task_manager.service import TaskService
 
+
 def test_create_task_success(service):
     task = service.create_task("Write report", priority=TaskPriority.HIGH)
 

@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 from uuid import uuid4
+
 
 #name=TODO , value=todo
 class TaskStatus(str, Enum):
@@ -24,7 +25,7 @@ class Task:
     priority: TaskPriority = TaskPriority.MEDIUM
     #default factory is used to generate a new unique id for each task using uuid4, and to set the created_at timestamp to the current time in ISO format
     id: str = field(default_factory=lambda: str(uuid4()))
-    created_at: str = field(default_factory=lambda: datetime.now().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
     #JSON understand iso format
     def to_dict(self) -> dict:
         return {
