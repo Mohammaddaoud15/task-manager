@@ -23,8 +23,11 @@ class TaskStorage:
     def _load_and_save(self):
         """Load tasks, yield the list for mutation, then persist it back."""
         tasks = self._read_all()
-        yield tasks
-        self._write_all(tasks)
+        try:
+            yield tasks
+        finally:
+
+            self._write_all(tasks)
 
     def _read_all(self) -> list[dict]:
         return json.loads(self.path.read_text()) #self.path returns .json
