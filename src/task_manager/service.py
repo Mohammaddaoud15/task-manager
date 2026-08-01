@@ -22,7 +22,7 @@ class TaskService:
         task = Task(
             title=title.strip(),
             description=description.strip(),
-            priority=priority,
+            priority=priority,#not string--> cant strip
         )
         return self.storage.add(task)
 

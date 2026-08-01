@@ -26,7 +26,7 @@ class Task:
     #default factory is used to generate a new unique id for each task using uuid4, and to set the created_at timestamp to the current time in ISO format
     id: str = field(default_factory=lambda: str(uuid4()))
     created_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
-    #JSON understand iso format
+    #JSON understand dict format
     def to_dict(self) -> dict:
         return {
         "title": self.title,
@@ -40,7 +40,7 @@ class Task:
     def from_dict(cls, data: dict) -> "Task":
         return cls( #cls--> refers to the class itself, so cls(...) creates a new instance of the Task class using the provided data dictionary
         title=data["title"],
-        description=data.get("description", ""),
+        description=data.get("description", ""),#its okay to be missing, so we use .get()
         status=TaskStatus(data["status"]),#enum
         priority=TaskPriority(data["priority"]),#enum
         id=data["id"],

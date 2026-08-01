@@ -60,10 +60,15 @@ def test_remove_task_deletes_it(service):
 def test_create_task_calls_storage_add(mocker):
     
 
-    fake_storage = mocker.Mock()
+    fake_storage = mocker.Mock()#just records what happens to it, doesn't actually do anything
+    #what happens when we call add() on the fake storage
     fake_storage.add.side_effect = lambda task: task
 
     svc = TaskService(storage=fake_storage)
     svc.create_task("Whatever")
 
     fake_storage.add.assert_called_once()
+
+
+    #only use the storage fixture when we test the actual behavior
+    #but here we need to test only if it was called so  mocker
